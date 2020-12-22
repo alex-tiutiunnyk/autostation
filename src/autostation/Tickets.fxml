@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="autostation.Tickets"
+            prefHeight="400.0" prefWidth="700.0">
+
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+        <children>
+            <TableView fx:id="tviewTickets" layoutX="147.0" layoutY="47.0" prefHeight="310.0"
+                       prefWidth="540.0">
+                <columns>
+                    <TableColumn fx:id="colIdTicket" prefWidth="30.0" text="Id"/>
+                    <TableColumn fx:id="colNameTicket" prefWidth="70.0" text="Name"/>
+                    <TableColumn fx:id="colSurnameTicket" prefWidth="70.0" text="Surname"/>
+                    <TableColumn fx:id="colDepartureTicket" prefWidth="75.0" text="Departure"/>
+                    <TableColumn fx:id="colArrivalTicket" prefWidth="75.0" text="Arrival"/>
+                    <TableColumn fx:id="colDepTimeTicket" prefWidth="75.0" text="Dep time"/>
+                    <TableColumn fx:id="colArrTimeTicket" prefWidth="75.0" text="Arr time"/>
+                    <TableColumn fx:id="colPriceTicket" prefWidth="70.0" text="Price"/>
+                </columns>
+            </TableView>
+            <Button fx:id="btnSearchTicket" layoutX="616.0" layoutY="14.0" mnemonicParsing="false"
+                    prefHeight="25.0" prefWidth="70.0" text="Search"/>
+            <TextField fx:id="tfSearchTicket" layoutX="148.0" layoutY="14.0" prefHeight="25.0"
+                       prefWidth="464.0"/>
+            <VBox layoutX="14.0" layoutY="47.0" prefHeight="150.0" prefWidth="120.0" spacing="1.0">
+                <children>
+                    <Label prefHeight="20.0" prefWidth="60.0" text="Name"/>
+                    <TextField fx:id="tfNameTicket"/>
+                    <Label prefHeight="20.0" prefWidth="60.0" text="Surname"/>
+                    <TextField fx:id="tfSurnameTicket"/>
+                    <Label prefHeight="20.0" prefWidth="60.0" text="Age"/>
+                    <TextField fx:id="tfAgeTicket"/>
+                </children>
+            </VBox>
+            <Button fx:id="btnUpdateTicket" layoutX="14.0" layoutY="202.0" mnemonicParsing="false"
+                    text="Update"/>
+            <Button fx:id="btnDeleteTicket" layoutX="74.0" layoutY="202.0" mnemonicParsing="false"
+                    text="Delete"/>
+        </children>
+    </AnchorPane>
+
+</AnchorPane>

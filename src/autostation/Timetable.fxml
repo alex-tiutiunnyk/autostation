@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="autostation.TimetableController"
+            prefHeight="400.0" prefWidth="700.0">
+
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+        <children>
+            <VBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="47.0" prefHeight="160.0"
+                  prefWidth="60.0" spacing="15.0">
+                <children>
+                    <Label prefHeight="17.0" prefWidth="59.0" text="Departure"/>
+                    <Label prefHeight="17.0" prefWidth="58.0" text="Arrival"/>
+                    <Label alignment="TOP_LEFT" contentDisplay="TOP" prefHeight="17.0"
+                           prefWidth="61.0" text="Dep time"/>
+                    <Label prefHeight="17.0" prefWidth="60.0" text="Arr time"/>
+                    <Label prefHeight="17.0" prefWidth="60.0" text="Price"/>
+                </children>
+            </VBox>
+            <VBox alignment="CENTER_LEFT" layoutX="82.0" layoutY="47.0" prefHeight="160.0"
+                  prefWidth="190.0" spacing="8.0">
+                <children>
+                    <TextField fx:id="tfDepartureWay"/>
+                    <TextField fx:id="tfArrivalWay"/>
+                    <TextField fx:id="tfDepTimeWay"/>
+                    <TextField fx:id="tfArrTimeWay" prefWidth="200.0"/>
+                    <TextField fx:id="tfPriceWay" prefWidth="200.0"/>
+                </children>
+            </VBox>
+            <Button fx:id="btnSearchWay" layoutX="616.0" layoutY="14.0" mnemonicParsing="false"
+                    prefHeight="25.0" prefWidth="70.0" text="Search"/>
+            <TableView fx:id="tviewTimetable" layoutX="285.0" layoutY="47.0" prefHeight="310.0"
+                       prefWidth="400.0">
+                <columns>
+                    <TableColumn fx:id="colIdWay" prefWidth="30.0" text="Id"/>
+                    <TableColumn fx:id="colDepartureWay" prefWidth="75.0" text="Departure"/>
+                    <TableColumn fx:id="colArrivalWay" prefWidth="75.0" text="Arrival"/>
+                    <TableColumn fx:id="colDepTimeWay" prefWidth="75.0" text="Dep time"/>
+                    <TableColumn fx:id="colArrTimeWay" minWidth="3.0" prefWidth="75.0"
+                                 text="Arr time"/>
+                    <TableColumn fx:id="colPriceWay" minWidth="3.0" prefWidth="70.0" text="Price"/>
+                </columns>
+            </TableView>
+            <TextField fx:id="tfSearchWay" layoutX="285.0" layoutY="14.0" prefHeight="25.0"
+                       prefWidth="325.0"/>
+            <Button fx:id="btnAddWay" layoutX="72.0" layoutY="238.0" mnemonicParsing="false"
+                    prefHeight="25.0" prefWidth="60.0" text="Add"/>
+            <Button fx:id="btnUpdateWay" layoutX="142.0" layoutY="238.0" mnemonicParsing="false"
+                    prefHeight="25.0" prefWidth="60.0" text="Update"/>
+            <Button fx:id="btnDeleteWay" layoutX="212.0" layoutY="238.0" mnemonicParsing="false"
+                    prefHeight="25.0" prefWidth="60.0" text="Delete"/>
+            <Button fx:id="btnBuyTicket" layoutX="72.0" layoutY="273.0" mnemonicParsing="false"
+                    prefHeight="25.0" prefWidth="200.0" text="Buy a ticket"/>
+        </children>
+    </AnchorPane>
+
+</AnchorPane>
