@@ -3,44 +3,44 @@ package autostation;
 import java.util.Date;
 
 public class Timetable {
-    private Integer idTimetable;
-    private String departureTimetable;
-    private String arrivalTimetable;
-    private Date depTimeTimetable;
-    private Date arrTimeTimetable;
-    private Double priceTimetable;
+    private Integer idWay;
+    private String departureWay;
+    private String arrivalWay;
+    private Date depTimeWay;
+    private Date arrTimeWay;
+    private Double priceWay;
 
     public Timetable(Integer idTimetable, String departureTimetable, String arrivalTimetable,
                      Date depTimeTimetable, Date arrTimeTimetable, Double priceTimetable) {
-        this.idTimetable = idTimetable;
-        this.departureTimetable = departureTimetable;
-        this.arrivalTimetable = arrivalTimetable;
-        this.depTimeTimetable = depTimeTimetable;
-        this.arrTimeTimetable = arrTimeTimetable;
-        this.priceTimetable = priceTimetable;
+        this.idWay = idTimetable;
+        this.departureWay = departureTimetable;
+        this.arrivalWay = arrivalTimetable;
+        this.depTimeWay = depTimeTimetable;
+        this.arrTimeWay = arrTimeTimetable;
+        this.priceWay = priceTimetable;
     }
 
     public Integer getIdTimetable() {
-        return idTimetable;
+        return idWay;
     }
 
-    public String getDepartureTimetable() {
-        return departureTimetable;
+    public String getDepartureWay() {
+        return departureWay;
     }
 
-    public String getArrivalTimetable() {
-        return arrivalTimetable;
+    public String getArrivalWay() {
+        return arrivalWay;
     }
 
-    public Date getDepTimeTimetable() {
-        return depTimeTimetable;
+    public Date getDepTimeWay() {
+        return depTimeWay;
     }
 
-    public Date getArrTimeTimetable() {
-        return arrTimeTimetable;
+    public Date getArrTimeWay() {
+        return arrTimeWay;
     }
 
-    public Double getPriceTimetable() {
-        return priceTimetable;
+    public Double getPriceWay() {
+        return priceWay;
     }
 }

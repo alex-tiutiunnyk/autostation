@@ -10,15 +10,17 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Tab/autostation.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("TabView.fxml"));
 //        primaryStage.setTitle("Drivers");
         primaryStage.setScene(new Scene(root, 700, 400));
         primaryStage.show();
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         launch(args);
-//        Controller controller = new Controller();
-        DriversController driversController = new DriversController();
-    }
+        *//*TabViewController tabViewController = new TabViewController();
+        TimetableController timetableController = new TimetableController();
+        DriversController driversController = new DriversController();*//*
+//        DriversController driversController = new DriversController();
+    }*/
 }
