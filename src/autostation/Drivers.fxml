@@ -7,6 +7,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="autostation.DriversController">
 
@@ -24,7 +25,7 @@
                 <children>
                     <TextField fx:id="tfNameDriver" />
                     <TextField fx:id="tfSurnameDriver" />
-                    <TextField fx:id="tfAgeDriver" />
+               <TextField fx:id="tfAgeDriver" />
                     <TextField fx:id="tfLicenseDriver" prefWidth="200.0" />
                 </children>
             </VBox>
@@ -35,13 +36,18 @@
             <TextField fx:id="tfSearchDriver" layoutX="285.0" layoutY="14.0" prefHeight="25.0" prefWidth="325.0" />
             <TableView fx:id="tviewDrivers" layoutX="285.0" layoutY="48.0" onMouseClicked="#handleMouseAction" prefHeight="309.0" prefWidth="401.0">
                 <columns>
-                    <TableColumn fx:id="colIdDriver" prefWidth="30.0" text="Id" />
-                    <TableColumn fx:id="colNameDriver" prefWidth="95.0" text="Name" />
+                    <TableColumn fx:id="colIdDriver" prefWidth="30.0" text="Id" visible="false" />
+                    <TableColumn fx:id="colNameDriver" prefWidth="102.0" text="Name" />
                     <TableColumn fx:id="colSurnameDriver" prefWidth="95.0" text="Surname" />
-                    <TableColumn fx:id="colAgeDriver" prefWidth="90.0" text="Age" />
-                    <TableColumn fx:id="colLicenseDriver" prefWidth="90.0" text="License" />
+                    <TableColumn fx:id="colAgeDriver" prefWidth="100.0" text="Age" />
+                    <TableColumn fx:id="colLicenseDriver" prefWidth="103.0" text="License" />
                 </columns>
             </TableView>
+         <Label fx:id="tfErrorDriver" layoutX="72.0" layoutY="340.0" prefHeight="17.0" prefWidth="200.0" text="Працівнику повинно бути 18+" textFill="#eb0d0d" visible="false">
+            <font>
+               <Font size="11.0" />
+            </font>
+         </Label>
         </children>
     </AnchorPane>
 </AnchorPane>

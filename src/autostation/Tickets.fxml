@@ -7,6 +7,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="autostation.TicketsController">
 
@@ -14,15 +15,15 @@
         <children>
             <TableView fx:id="tviewTickets" layoutX="147.0" layoutY="47.0" onMouseClicked="#handleMouseAction" prefHeight="310.0" prefWidth="540.0">
                 <columns>
-                    <TableColumn fx:id="colIdTicket" prefWidth="25.0" text="Id" />
-                    <TableColumn fx:id="colNameTicket" prefWidth="60.0" text="Name" />
+                    <TableColumn fx:id="colIdTicket" prefWidth="25.0" text="Id" visible="false" />
+                    <TableColumn fx:id="colNameTicket" prefWidth="67.0" text="Name" />
                     <TableColumn fx:id="colSurnameTicket" prefWidth="60.0" text="Surname" />
-                    <TableColumn fx:id="colAgeTicket" prefWidth="60.0" text="Age" />
-                    <TableColumn fx:id="colDepartureTicket" prefWidth="65.0" text="Departure" />
-                    <TableColumn fx:id="colArrivalTicket" prefWidth="65.0" text="Arrival" />
-                    <TableColumn fx:id="colDepTimeTicket" prefWidth="70.0" text="Dep time" />
-                    <TableColumn fx:id="colArrTimeTicket" prefWidth="70.0" text="Arr time" />
-               <TableColumn fx:id="colPriceTicket" prefWidth="65.0" text="Price" />
+                    <TableColumn fx:id="colAgeTicket" prefWidth="62.0" text="Age" />
+                    <TableColumn fx:id="colDepartureTicket" prefWidth="75.0" text="Departure" />
+                    <TableColumn fx:id="colArrivalTicket" prefWidth="69.0" text="Arrival" />
+                    <TableColumn fx:id="colDepTimeTicket" prefWidth="76.0" text="Dep time" />
+                    <TableColumn fx:id="colArrTimeTicket" prefWidth="67.0" text="Arr time" />
+               <TableColumn fx:id="colPriceTicket" prefWidth="62.0" text="Price" />
                 </columns>
             </TableView>
             <Button fx:id="btnSearchTicket" layoutX="616.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="70.0" text="Search" />
@@ -39,7 +40,11 @@
             </VBox>
             <Button fx:id="btnUpdateTicket" layoutX="14.0" layoutY="202.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Update" />
             <Button fx:id="btnDeleteTicket" layoutX="74.0" layoutY="202.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Delete" />
+         <Label fx:id="tfErrorTicket" layoutX="14.0" layoutY="340.0" prefHeight="17.0" prefWidth="120.0" text="Вік повинен бути 18+" textFill="#eb0d0d" visible="false">
+            <font>
+               <Font size="11.0" />
+            </font>
+         </Label>
         </children>
     </AnchorPane>
-
 </AnchorPane>

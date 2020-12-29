@@ -7,10 +7,7 @@ import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
@@ -18,6 +15,8 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
@@ -27,7 +26,6 @@ import static autostation.TabViewController.getConnection;
 
 public class TicketsController implements Initializable {
     private Integer currentId;
-    final ObservableList<Tickets> ticketsList = FXCollections.observableArrayList();
 
     @FXML
     private TableView<Tickets> tviewTickets;
@@ -61,9 +59,10 @@ public class TicketsController implements Initializable {
     private Button btnUpdateTicket;
     @FXML
     private Button btnDeleteTicket;
-    //todo relization
     @FXML
     private Button btnSearchTicket;
+    @FXML
+    private Label tfErrorTicket;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -71,6 +70,7 @@ public class TicketsController implements Initializable {
     }
 
     public ObservableList<Tickets> getTicketsList() {
+        ObservableList<Tickets> ticketsList = FXCollections.observableArrayList();
         Connection conn = getConnection();
         String query = "SELECT ticket.id, passenger_name, passenger_surname, passenger_age, departure_station, " +
                 "arrival_station, departure_time, arrival_time, price FROM ticket, way WHERE way.id = ticket.way_id";
@@ -92,7 +92,6 @@ public class TicketsController implements Initializable {
                         rs.getDouble("price"));
                 ticketsList.add(tickets);
             }
-
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -115,7 +114,7 @@ public class TicketsController implements Initializable {
     }
 
     private void searchButton() {
-        FilteredList<Tickets> filteredData = new FilteredList<>(ticketsList, e -> true);
+        FilteredList<Tickets> filteredData = new FilteredList<>(getTicketsList(), e -> true);
         filteredData.setPredicate((Predicate<? super Tickets>) tickets -> {
             if (tfSearchTicket == null || tfSearchTicket.getText().isEmpty()) {
                 return true;
@@ -127,11 +126,11 @@ public class TicketsController implements Initializable {
                 return true;
             } else if (tickets.getSurnameTicket().toLowerCase().contains(lowerCaseFilter)) {
                 return true;
-            }  else if (tickets.getAgeTicket().toString().contains(lowerCaseFilter)) {
+            } else if (tickets.getAgeTicket().toString().contains(lowerCaseFilter)) {
                 return true;
             } else if (tickets.getDepartureTicket().toLowerCase().contains(lowerCaseFilter)) {
                 return true;
-            }  else if (tickets.getArrivalTicket().toLowerCase().contains(lowerCaseFilter)) {
+            } else if (tickets.getArrivalTicket().toLowerCase().contains(lowerCaseFilter)) {
                 return true;
             } else if (tickets.getDepTimeTicket().toString().contains(lowerCaseFilter)) {
                 return true;
@@ -147,11 +146,23 @@ public class TicketsController implements Initializable {
         tviewTickets.setItems(sortedData);
     }
 
-    private void updateRecord() {
+    private void updateRecord() throws ParseException {
+
         String query = "UPDATE ticket SET passenger_name = '" + tfNameTicket.getText() + "', passenger_surname = '" +
                 tfSurnameTicket.getText() + "', passenger_age = '" + tfAgeTicket.getText() + "' WHERE id = " + currentId + "";
-        executeQuery(query);
+        try {
+            if (!tfAgeTicket.toString().equals("")) {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                Date birthDate = sdf.parse(tfAgeTicket.getText());
+                Date date = sdf.parse("2002-01-01");
+                tfErrorTicket.setVisible(birthDate.after(date));
+            }
+            executeQuery(query);
+        } catch (Exception e) {
+        }
         showTickets();
+
+//        tviewTickets.refresh();
     }
 
     private void deleteButton() {
@@ -161,7 +172,7 @@ public class TicketsController implements Initializable {
     }
 
     @FXML
-    private void handleButtonAction(ActionEvent event) {
+    private void handleButtonAction(ActionEvent event) throws ParseException {
         if (event.getSource() == btnUpdateTicket) {
             updateRecord();
         } else if (event.getSource() == btnDeleteTicket) {
@@ -180,5 +191,4 @@ public class TicketsController implements Initializable {
         tfSurnameTicket.setText(tickets.getSurnameTicket());
         tfAgeTicket.setText("" + tickets.getAgeTicket());
     }
-
 }

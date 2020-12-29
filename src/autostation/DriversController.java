@@ -14,6 +14,8 @@ import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
@@ -23,11 +25,6 @@ import static autostation.TabViewController.getConnection;
 
 public class DriversController implements Initializable {
     private Integer currentId;
-    final ObservableList<Drivers> driverList = FXCollections.observableArrayList();
-
-    /*public void create(){
-
-    }*/
 
     @FXML
     private TextField tfNameDriver;
@@ -59,26 +56,18 @@ public class DriversController implements Initializable {
     private Button btnDeleteDriver;
     @FXML
     private Button btnSearchDriver;
+    @FXML
+    private Label tfErrorDriver;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         showDrivers();
     }
 
-    /*public Connection getConnection() {
-        Connection conn;
-        try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/autostation", "root", "34mavima");
-            return conn;
-        } catch (Exception ex) {
-            System.out.println("Error: " + ex.getMessage());
-            return null;
-        }
-    }
-*/
     public ObservableList<Drivers> getDriversList() {
+        ObservableList<Drivers> driverList = FXCollections.observableArrayList();
         Connection conn = getConnection();
-        String query = "SELECT * FROM driver";
+        String query = "SELECT * FROM driver ";
         Statement st;
         ResultSet rs;
         try {
@@ -93,7 +82,6 @@ public class DriversController implements Initializable {
                         rs.getInt("driver_license"));
                 driverList.add(drivers);
             }
-
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -112,7 +100,7 @@ public class DriversController implements Initializable {
     }
 
     private void searchButton() {
-        FilteredList<Drivers> filteredData = new FilteredList<>(driverList, e -> true);
+        FilteredList<Drivers> filteredData = new FilteredList<>(getDriversList(), e -> true);
         filteredData.setPredicate((Predicate<? super Drivers>) drivers -> {
             if (tfSearchDriver == null || tfSearchDriver.getText().isEmpty()) {
                 return true;
@@ -135,29 +123,40 @@ public class DriversController implements Initializable {
         SortedList<Drivers> sortedData = new SortedList<>(filteredData);
         sortedData.comparatorProperty().bind(tviewDrivers.comparatorProperty());
         tviewDrivers.setItems(sortedData);
-
-     /*  tfSearchDriver.setOnKeyReleased(e -> {
-            tfSearchDriver.textProperty().addListener((observableValue, oldValue, newValue) -> {
-            });
-        });*/
     }
 
-    private void insertRecord() {
+    private void insertRecord() throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date birthDate = sdf.parse(tfAgeDriver.getText());
+        Date date = sdf.parse("2002-01-01");
         String query = "INSERT INTO driver(driver_name, driver_surname, age, driver_license) " +
                 "VALUES ('" + tfNameDriver.getText() + "','" + tfSurnameDriver.getText() + "',"
-                + (tfAgeDriver.getText().isEmpty() ? null : "'" + tfAgeDriver.getText() + "'") +
+                + (tfAgeDriver.toString().isEmpty() ? null : "'" + tfAgeDriver.getText() + "'") +
                 "," + tfLicenseDriver.getText() + ")";
-        executeQuery(query);
-        showDrivers();
+        if (birthDate.after(date)) {
+            tfErrorDriver.setVisible(true);
+        } else {
+            tfErrorDriver.setVisible(false);
+            executeQuery(query);
+            showDrivers();
+        }
     }
 
-    private void updateRecord() {
+    private void updateRecord() throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date birthDate = sdf.parse(tfAgeDriver.getText());
+        Date date = sdf.parse("2002-01-01");
         String query = "UPDATE driver SET driver_name = '" + tfNameDriver.getText() + "', driver_surname = '" +
-                tfSurnameDriver.getText() + "', age = " + (tfAgeDriver.getText().isEmpty() ? null : "'" +
+                tfSurnameDriver.getText() + "', age = " + (tfAgeDriver.toString().isEmpty() ? null : "'" +
                 tfAgeDriver.getText() + "'") + ", driver_license = " + tfLicenseDriver.getText() +
                 " WHERE id = " + currentId + "";
-        executeQuery(query);
-        showDrivers();
+        if (birthDate.after(date)) {
+            tfErrorDriver.setVisible(true);
+        } else {
+            tfErrorDriver.setVisible(false);
+            executeQuery(query);
+            showDrivers();
+        }
     }
 
     private void deleteButton() {
@@ -166,19 +165,8 @@ public class DriversController implements Initializable {
         showDrivers();
     }
 
-    /*private void executeQuery(String query) {
-        Connection conn = getConnection();
-        Statement st;
-        try {
-            st = conn.createStatement();
-            st.executeUpdate(query);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }*/
-
     @FXML
-    private void handleButtonAction(ActionEvent event) {
+    private void handleButtonAction(ActionEvent event) throws ParseException {
         if (event.getSource() == btnAddDriver) {
             insertRecord();
         } else if (event.getSource() == btnUpdateDriver) {
